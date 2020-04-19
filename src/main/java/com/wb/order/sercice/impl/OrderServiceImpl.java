@@ -14,6 +14,7 @@ import com.wb.order.enums.PayStatusEnum;
 import com.wb.order.enums.ResultEnum;
 import com.wb.order.exception.SellException;
 import com.wb.order.sercice.OrderService;
+import com.wb.order.sercice.PayService;
 import com.wb.order.sercice.ProductService;
 import com.wb.order.utils.KeyUtils;
 
@@ -42,6 +43,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderMasterRepository orderMasterRepository;
     @Autowired
     private OrderDetailRepository orderDetailRepository;
+    @Autowired
+    private PayService payService;
 
     @Override
     @Transactional
@@ -150,7 +153,7 @@ public class OrderServiceImpl implements OrderService {
         productService.increaseStock(cartDTOList);
         //如果已支付，需要退款
         if (orderDTO.getOrderStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
-            //TODO
+            payService.refund(orderDTO);
         }
         return orderDTO;
     }

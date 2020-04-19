@@ -12,7 +12,6 @@ import java.util.Date;
 
 @Entity
 @Data
-
 public class ProductCategory implements Serializable {
     //类目id
     @Id //标注用于声明一个实体类的属性映射为数据库的主键列

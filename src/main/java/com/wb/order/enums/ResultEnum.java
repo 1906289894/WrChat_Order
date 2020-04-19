@@ -1,6 +1,7 @@
 package com.wb.order.enums;
 
 import lombok.Getter;
+import org.aspectj.apache.bcel.classfile.Code;
 
 @Getter
 public enum ResultEnum {
@@ -16,6 +17,9 @@ public enum ResultEnum {
     ORDER_PAY_STATUS_ERROR(17,"订单支付状态不正确"),
     CART_EMPTY_ERROR(18,"购物车为空错误"),
     ORDER_OWNER_ERROR(19,"该订单不属于当前用户"),
+
+    WX_MP_ERROR(20,"微信授权错误"),
+    WXPAY_NOTIFY_MONEY_VERIFY_ERROR(21,"微信异步通知金额校验不通过"),
     ;
 
     private Integer code;
