@@ -49,6 +49,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
+
         //初始化价格
         BigDecimal orderAmout = new BigDecimal(BigInteger.ZERO);
         //获得订单id

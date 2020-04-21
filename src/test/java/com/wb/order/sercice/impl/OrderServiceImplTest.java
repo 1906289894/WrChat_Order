@@ -29,15 +29,15 @@ public class OrderServiceImplTest {
 
     private final String ORDER_ID = "1558400735385216227";
 
-    private final String buyerOpenid = "fgdregdfdgd";
+    private final String buyerOpenid = "sd131sf31sFDF";
 
     @Test
     public void create() {
 
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setBuyerAddress("慕课网");
-        orderDTO.setBuyerName("师兄");
-        orderDTO.setBuyerPhone("123456789012");
+        orderDTO.setBuyerAddress("天津滨海新区海滨大道115号3楼313号");
+        orderDTO.setBuyerName("唐正斌");
+        orderDTO.setBuyerPhone("19459155825");
         orderDTO.setBuyerOpenid(buyerOpenid);
 
         //购物车
@@ -45,6 +45,9 @@ public class OrderServiceImplTest {
         OrderDetail o1 = new OrderDetail();
         o1.setProductId(10001);
         o1.setProductQuantity(1);
+        OrderDetail o2 = new OrderDetail();
+        o2.setProductId(10002);
+        o2.setProductQuantity(2);
         orderDetailList.add(o1);
 
         orderDTO.setOrderDetailList(orderDetailList);

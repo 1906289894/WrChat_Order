@@ -4,6 +4,7 @@ import com.wb.order.dao.ProductInfoRepository;
 import com.wb.order.domain.ProductCategory;
 import com.wb.order.domain.ProductInfo;
 import com.wb.order.dto.CartDTO;
+import com.wb.order.enums.ProductStatusEnum;
 import com.wb.order.enums.ResultEnum;
 import com.wb.order.exception.SellException;
 import com.wb.order.sercice.ProductService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -24,7 +26,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductInfo findOne(Integer productId) {
-
         Optional<ProductInfo> optional = repository.findById(productId);
 
         return optional.isPresent()?optional.get():null;
@@ -32,6 +33,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductInfo> findUpAll() {
+
         //return repository.findByProductStatus();
         List<ProductInfo> byProductStatus = repository.findByProductStatus(0);
         return byProductStatus;
@@ -74,6 +76,55 @@ public class ProductServiceImpl implements ProductService {
             productInfo.setProductStock(resultStock);
             repository.save(productInfo);
         }
+    }
+
+    @Override
+    public ProductInfo offSale(String productIds) {
+        //转换productId为Integer类型
+        String[] split = productIds.split(",");
+        String s = split[0]+split[1];
+        Integer productId = Integer.valueOf(s);
+        ProductInfo productInfo = null;
+        try {
+            Optional<ProductInfo> optional = repository.findById(productId);
+            if (optional.isPresent()) {
+                productInfo = optional.get();
+            }
+        }catch (NoSuchElementException e){
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        //判断商品状态
+        if (productInfo.getProductStatusEnum() == ProductStatusEnum.DOWN){
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        //更新状态
+        productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        return repository.save(productInfo);
+    }
+
+    @Override
+    public ProductInfo onSale(String productIds) {
+        //转换productId为Integer类型
+        String[] split = productIds.split(",");
+        String s = split[0]+split[1];
+        Integer productId = Integer.valueOf(s);
+
+        ProductInfo productInfo = null;
+        try {
+            Optional<ProductInfo> optional = repository.findById(productId);
+            if (optional.isPresent()) {
+                productInfo = optional.get();
+            }
+        }catch (NoSuchElementException e){
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        //判断商品状态
+        if (productInfo.getProductStatusEnum() == ProductStatusEnum.UP){
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        //更新状态
+        productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+        return repository.save(productInfo);
     }
 
 

@@ -22,6 +22,10 @@ public class ProductCategory implements Serializable {
     //类目编号
     private Integer categoryType;
 
+    private Date createTime = new Date();
+
+    private Date updateTime = new Date();
+
     public ProductCategory() {
     }
 }

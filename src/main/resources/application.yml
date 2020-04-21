@@ -27,7 +27,7 @@ server:
 wechat:
   mpAppId: wxd41d41dce765881f
   mpAppSecret: a3e25a6e72e80c696656cbc3392a33c5
-  mchId:
-  mchKey:
-  keyPath: /var/xx/xx
-  notifyUrl: http://xxx/sell/pay/notify
+#  mchId:
+#  mchKey:
+#  keyPath: /var/xx/xx
+#  notifyUrl: http://xxx/sell/pay/notify

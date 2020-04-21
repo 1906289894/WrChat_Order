@@ -17,5 +17,16 @@ public class KeyUtils {
         Integer a = random.nextInt(900000)+100000;
         return System.currentTimeMillis()+ String.valueOf(a);
     }
+    /**
+     * 生成唯一的主键
+     * 格式：毫秒时间字符串+六位随机数
+     * @return
+     */
+    public static synchronized Integer gen2UnqueKey(){
+        Random random = new Random();
+        //生成六位随机数
+        Integer a = random.nextInt(90000)+10000;
+        return a;
+    }
 
 }
