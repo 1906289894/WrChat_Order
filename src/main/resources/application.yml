@@ -10,12 +10,19 @@ spring:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
+  jackson:
+    default-property-inclusion: non_null
   freemarker:
     cache: false
     charset: utf-8
     content-type: text/html
     template-loader-path: classpath:/templates
     suffix: .ftl
+  redis:
+    host: 192.168.3.42
+    port: 6379
+
+
 #logging:
 #  pattern:
 #    console: "%d - %msg%n"
@@ -31,3 +38,5 @@ wechat:
 #  mchKey:
 #  keyPath: /var/xx/xx
 #  notifyUrl: http://xxx/sell/pay/notify
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

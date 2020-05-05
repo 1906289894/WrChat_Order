@@ -27,6 +27,10 @@ public enum ResultEnum {
     PRODUCT_SAVE_SUCCESS(26,"商品保存成功"),
     CATEGORY_NOT_EXIST(27,"类目不存在"),
     CATEGORY_SAVE_SUCCESS(28,"类目保存成功"),
+    LOGIN_FAILED(29,"登陆失败"),
+    LOGIN_SUCCESS(30,"登陆成功"),
+    LOGOUT_SUCCESS(31,"退出成功"),
+    LOGOUT_FAILED(32,"退出失败"),
     ;
 
     private Integer code;

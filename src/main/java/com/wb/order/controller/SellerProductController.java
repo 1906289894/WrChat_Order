@@ -59,6 +59,12 @@ public class SellerProductController {
         return new ModelAndView("/product/list",map);
     }
 
+    /**
+     * 商品上架
+     * @param productId
+     * @param map
+     * @return
+     */
     @GetMapping("on_sale")
     public ModelAndView onSale(@RequestParam("productId") String productId,
                                Map<String,Object> map){
@@ -74,6 +80,7 @@ public class SellerProductController {
         return new ModelAndView("common/success");
     }
 
+    //商品下架
     @GetMapping("off_sale")
     public ModelAndView offSale(@RequestParam("productId") String productId,
                                Map<String,Object> map){

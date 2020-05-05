@@ -12,6 +12,9 @@ import com.wb.order.utils.ResultVOUtils;
 import com.wb.order.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.util.CollectionUtils;
@@ -37,6 +40,8 @@ public class BuyerOrderController {
 
     //创建订单
     @PostMapping("/create")
+    //@CachePut(cacheNames = "product" ,key = "123")
+    @CacheEvict(cacheNames = "product",key = "123")
     public ResultVO<Map<String,String>> create(@Valid OrderForm orderForm, BindingResult bindingResult){
         //表单校验
         if (bindingResult.hasErrors()){
@@ -60,6 +65,7 @@ public class BuyerOrderController {
 
     //带分页的订单列表
     @GetMapping("/list")
+    @Cacheable(cacheNames = "product",key = "123")
     public ResultVO<List<OrderDTO>> list(@RequestParam("openid") String openid,
                                          @RequestParam(value = "page",defaultValue = "0")Integer page,
                                          @RequestParam(value = "size",defaultValue = "10")Integer size){

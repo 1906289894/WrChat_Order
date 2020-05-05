@@ -13,6 +13,7 @@ import java.util.Date;
 @Entity
 @Data
 public class ProductCategory implements Serializable {
+    private static final long serialVersionUID = -3643911199039246860L;
     //类目id
     @Id //标注用于声明一个实体类的属性映射为数据库的主键列
     @GeneratedValue(strategy = GenerationType.IDENTITY)
